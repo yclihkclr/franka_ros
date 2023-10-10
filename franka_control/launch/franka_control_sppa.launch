@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="robot_ip"  default="192.168.1.20"/>
+  <arg name="robot" default="panda" doc="choose your robot. Possible values: [panda, fr3]"/>
+  <arg name="arm_id" default="$(arg robot)" />
+  <arg name="load_gripper" default="false" />
+  <arg name="xacro_args" default="" />
+
+  <!-- <param name="robot_description" command="$(find xacro)/xacro $(find franka_description)/robots/$(arg robot)/$(arg robot).urdf.xacro hand:=$(arg load_gripper) arm_id:=$(arg arm_id) $(arg xacro_args)"/> -->
+  <param name="robot_description" command="cat $(find franka_description)/panda/urdf/panda_piab_single_cup.urdf" />
+  <!-- <include file="$(find franka_gripper)/launch/franka_gripper.launch" if="$(arg load_gripper)">
+    <arg name="robot_ip" value="$(arg robot_ip)" />
+    <arg name="arm_id"   value="$(arg arm_id)" />
+  </include> -->
+
+  <!-- <node name="franka_control" pkg="franka_control" type="franka_control_node" output="screen" required="true">
+    <rosparam command="load" file="$(find franka_control)/config/franka_control_node.yaml" subst_value="true" />
+    <param name="robot_ip" value="$(arg robot_ip)" />
+  </node> -->
+
+  <!-- Given the published joint states, publish tf for the robot links -->
+  <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" /> -->
+
+  <!-- <rosparam command="load" file="$(find franka_control)/config/default_controllers.yaml" subst_value="true" />
+  <node name="state_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="franka_state_controller"/> -->
+
+</launch>
